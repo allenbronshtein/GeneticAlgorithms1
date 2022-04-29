@@ -215,17 +215,27 @@ int main()
 	EightQueenFitness fitness_function;
 	gen_ns::selection_func_ns::ExploreExploitSelection< uint_least8_t> selection_function;
 	EightQueenMutation mutation_function;
-	for (unsigned int population_size = 128; population_size <= 1024; population_size *= 2) {
-		for (double crossover_prob = 0.5; crossover_prob <= 1; crossover_prob += 0.1) {
-			for (double mutation_prob = 0.01; mutation_prob <= 1.2; mutation_prob += 0.5) {
+
+	//modify values
+	//for (unsigned int population_size = 128; population_size <= 1024; population_size *= 2) {
+	//	for (double crossover_prob = 0.5; crossover_prob <= 1; crossover_prob += 0.1) {
+	//		for (double mutation_prob = 0.01; mutation_prob <= 1.2; mutation_prob += 0.5) {
+
+	//------------------------------------------------User values------------------------------------------//
+	unsigned int population_size = 1024;
+	double crossover_prob = 0.8;
+	double mutation_prob = 1;
+	unsigned int record_data_per_generations = 20; //Per how much generations to record data
+	unsigned int generation_limit = 1000; //After how much generations program terminates
+	//----------------------------------------------------------------------------------------------------------//
 				gen_ns::GeneticModel<uint_least8_t>genetic_model(CHROMOSOME_SIZE, population_size, &initialize_function, &selection_function, &crossover_function, &fitness_function, &mutation_function, MAX_COLLISIONS);
 				genetic_model.set_min_number_of_solutions(92);
-				genetic_model.set_generation_limit(1000);
-				genetic_model.set_save_generations(20);
+				genetic_model.set_generation_limit(generation_limit);
+				genetic_model.set_save_generations(record_data_per_generations);
 				genetic_model.set_crossover_prob(crossover_prob);
 				genetic_model.set_gen_mutation_prob(mutation_prob);
 				genetic_round(genetic_model);
-			}
-		}
-	}
+	//		}
+	//	}
+	//}
 }
