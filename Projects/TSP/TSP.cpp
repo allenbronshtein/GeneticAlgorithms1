@@ -22,7 +22,10 @@ template <typename Gen>
 void genetic_round(gen_ns::GeneticModel<Gen> genetic_model) {
 	std::string file_prefix = GENETIC_OUTPUT_PREFIX;
 	std::string file_suffix = GENETIC_OUTPUT_SUFFIX;
+	auto start = std::chrono::high_resolution_clock::now();
 	genetic_model.start_sync();
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
 	auto means = genetic_model.get_saved_fitness_mean();
 	auto highests = genetic_model.get_saved_highest_fitness();
 	auto lowests = genetic_model.get_saved_lowest_fitness();
@@ -31,7 +34,9 @@ void genetic_round(gen_ns::GeneticModel<Gen> genetic_model) {
 	out =
 		std::to_string(genetic_model.get_population_size()) + "\n" +
 		std::to_string(genetic_model.get_crossover_prob()) + "\n" +
-		std::to_string(genetic_model.get_gen_mutation_prob()) + "\n";
+		std::to_string(genetic_model.get_gen_mutation_prob()) + "\n"+
+		std::to_string(duration.count()) + "\n"
+		;
 	std::string data = "";
 	for (int i = 0; i < size; i++) {
 		highests[i] = g_max_travel_distance - highests[i];
