@@ -5,7 +5,7 @@
 #define NUM_OF_MAX_SOLUTIONS 92
 #define GENETIC_OUTPUT_PREFIX ".\\results\\genetic\\genetic_8queen_out_"
 #define GENETIC_OUTPUT_SUFFIX ".txt"
-#define GREEDY_OUTPUT_FILE ".\\results\\brute_force\\out.txt"
+#define BF_OUTPUT_FILE ".\\results\\brute_force\\bruteforce_8queen_out.txt"
 #define ROW printf("\n\t-----------------------------------------------------------------\n")
 #define COL printf("\t|");
 #endif

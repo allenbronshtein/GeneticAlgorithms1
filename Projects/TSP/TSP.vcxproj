@@ -92,6 +92,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>echo f | xcopy $(ProjectDir)coordinates.txt $(SolutionDir)bin\$(Platform)\$(Configuration)\coordinates.txt /y /q</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -138,6 +141,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>echo f | xcopy $(ProjectDir)coordinates.txt $(SolutionDir)bin\$(Platform)\$(Configuration)\coordinates.txt /y /q</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TSP.h" />

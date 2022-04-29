@@ -57,6 +57,7 @@ void genetic_round(gen_ns::GeneticModel<Gen> genetic_model) {
 }
 
 void brute_force_eight_queen() {
+	std::string out = "";
 	auto start = std::chrono::high_resolution_clock::now();
 	int chess_board[] = { 0,1,2,3,4,5,6,7 };
 	int solutions_found = 0;
@@ -69,13 +70,14 @@ void brute_force_eight_queen() {
 			solutions_found++;
 			auto stop = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-			std::cout << "Time taken for solution number " << solutions_found << " : " << duration.count() << " milliseconds" << std::endl;
+			out += "Time taken for solution number " + std::to_string(solutions_found) + " : "  + std::to_string(duration.count()) + " milliseconds\n" ;
 		}
 
 	} while (std::next_permutation(chess_board, chess_board + CHROMOSOME_SIZE) || solutions_found < NUM_OF_MAX_SOLUTIONS);
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-	std::cout << "Finished exuecute in: " << duration.count() << " milliseconds" << std::endl;
+	out += "Finished exuecute in: " + std::to_string(duration.count()) + " milliseconds\n";
+	write_to_file(BF_OUTPUT_FILE, out);
 }
 
 //Requires size 8 chromosome, index is row num, value is col num
@@ -203,6 +205,8 @@ public:
 
 int main()
 {
+	system("mkdir .\\results\\brute_force\\");
+	system("mkdir .\\results\\genetic\\");
 	std::cout << "Now executing brute force" << std::endl;
 	brute_force_eight_queen();
 	std::cout << "\nNow executing Genetic algo" << std::endl;
